@@ -63,40 +63,46 @@
         .categories {
             display: flex;
             background: #f8f9fa;
-            padding: 0 15px;
+            padding: 20px 15px 25px 15px;
             position: sticky;
             top: 91px;
             z-index: 99;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             overflow-x: auto;
+            min-height: 80px;
+            align-items: center;
         }
 
         .category-btn {
             flex: 1;
-            padding: 18px 10px;
+            padding: 25px 10px 15px 10px;
             border: none;
             background: none;
             cursor: pointer;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: bold;
             color: #666;
-            border-bottom: 3px solid transparent;
+            border-bottom: 4px solid transparent;
             transition: all 0.3s ease;
             white-space: nowrap;
-            min-height: 60px;
+            min-height: 70px;
             display: flex;
             align-items: center;
             justify-content: center;
+            margin-bottom: 0;
+            line-height: 1.2;
         }
 
         .category-btn.active {
             color: #ff6b6b;
             border-bottom-color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.05);
         }
 
         .menu-section {
             padding: 20px;
             padding-bottom: 120px;
+            padding-top: 30px;
         }
 
         .menu-item {
@@ -596,45 +602,64 @@
         // === 菜單數據 ===
         const menuData = {
             noodles: [
-                { id: 1, name: '綜合(米粉+麵)', price: 60, desc: '米粉搭配麵條，口感豐富多層次' },
-                { id: 2, name: '炒麵', price: 60, desc: '香炒麵條配時蔬，經典台式口味' },
-                { id: 3, name: '炒米粉', price: 60, desc: '傳統炒米粉，香Q滑嫩' },
-                { id: 4, name: '麻油乾麵線', price: 70, desc: '溫補麻油香，細緻麵線' },
-                { id: 5, name: '麻油湯麵線', price: 80, desc: '熱湯配麻油麵線，暖胃好選擇' },
-                { id: 6, name: '牛肉麵', price: 150, desc: '精燉牛肉湯頭，軟嫩牛肉塊' }
+                { id: 1, name: '綜合(米粉+麵)', price: 60, desc: '米粉搭配麵條，口感豐富多層次', options: ['不加蒜泥'] },
+                { id: 2, name: '炒麵', price: 60, desc: '香炒麵條配時蔬，經典台式口味', options: ['不加蒜泥'] },
+                { id: 3, name: '炒米粉', price: 60, desc: '傳統炒米粉，香Q滑嫩', options: ['不加蒜泥'] },
+                { id: 4, name: '切仔乾麵', price: 60, desc: '經典乾麵，可選麵條種類', options: ['油麵', '意麵', '米粉'] },
+                { id: 5, name: '切仔湯麵', price: 60, desc: '清湯麵條，可選麵條種類', options: ['油麵', '意麵', '米粉'] },
+                { id: 6, name: '牛肉麵', price: 150, desc: '精燉牛肉湯頭，軟嫩牛肉塊', options: ['刀削', '油麵', '拉麵', '陽春', '意麵'] },
+                { id: 7, name: '麻油乾麵線', price: 70, desc: '溫補麻油香，細緻麵線' },
+                { id: 8, name: '麻油湯麵線', price: 80, desc: '熱湯配麻油麵線，暖胃好選擇' }
             ],
             rice: [
-                { id: 7, name: '滷肉飯', price: 60, desc: '經典台式滷肉，肥瘦適中香濃' },
-                { id: 8, name: '爌肉飯', price: 80, desc: '軟嫩爌肉塊配香Q白飯' },
-                { id: 9, name: '豬腳飯', price: 100, desc: '膠質豐富豬腳，入口即化' },
-                { id: 10, name: '豬腳麵線', price: 100, desc: '豬腳搭配麵線，營養滿分' },
-                { id: 11, name: '白飯', price: 15, desc: '香Q白米飯' }
+                { id: 9, name: '滷肉飯', price: 60, desc: '經典台式滷肉，肥瘦適中香濃', options: ['加辣'] },
+                { id: 10, name: '爌肉飯', price: 80, desc: '軟嫩爌肉塊配香Q白飯', options: ['加辣'] },
+                { id: 11, name: '豬腳飯', price: 120, desc: '膠質豐富豬腳，入口即化', options: ['加辣'] },
+                { id: 12, name: '豬腳麵線', price: 120, desc: '豬腳搭配麵線，營養滿分', options: ['加辣'] },
+                { id: 13, name: '抄手', price: 70, desc: '手工包製抄手，鮮美湯頭', options: ['加辣'] },
+                { id: 14, name: '滷肉便當', price: 100, desc: '滷肉配菜色豐富便當' },
+                { id: 15, name: '爌肉便當', price: 130, desc: '爌肉配菜色豐富便當' },
+                { id: 16, name: '豬腳便當', price: 130, desc: '豬腳配菜色豐富便當' },
+                { id: 17, name: '排骨便當', price: 130, desc: '排骨配菜色豐富便當' },
+                { id: 18, name: '白飯', price: 15, desc: '香Q白米飯' }
             ],
             snacks: [
-                { id: 12, name: '滷蛋/顆', price: 15, desc: '入味滷蛋，蛋黃綿密香濃' },
-                { id: 13, name: '麻油煎蛋', price: 30, desc: '香煎蛋配麻油，古早味十足' },
-                { id: 14, name: '豬腳一份', price: 130, desc: '單點豬腳，膠質滿滿' },
-                { id: 15, name: '爌肉一份', price: 100, desc: '單點爌肉，軟嫩香甜' },
-                { id: 16, name: '燙青菜', price: 50, desc: '當季時蔬，清燙保持原味' },
-                { id: 17, name: '油豆腐一份', price: 40, desc: '香煎油豆腐，外酥內嫩' },
-                { id: 18, name: '滷豆腐一份', price: 40, desc: '入味滷豆腐，口感扎實' }
+                { id: 19, name: '滷蛋/顆', price: 15, desc: '入味滷蛋，蛋黃綿密香濃' },
+                { id: 20, name: '爌肉切盤', price: 100, desc: '單點爌肉，軟嫩香甜' },
+                { id: 21, name: '炒腰子', price: 200, desc: '熱炒腰子，口感Q彈' },
+                { id: 22, name: '油豆腐', price: 40, desc: '香煎油豆腐，外酥內嫩' },
+                { id: 23, name: '豬皮', price: 50, desc: 'Q彈豬皮，膠質豐富' },
+                { id: 24, name: '燙青菜', price: 50, desc: '當季時蔬，清燙保持原味' },
+                { id: 25, name: '豬腳一份', price: 130, desc: '單點豬腳，膠質滿滿' },
+                { id: 26, name: '小魚乾辣椒醬', price: 200, desc: '香辣開胃小菜' },
+                { id: 27, name: '滷白菜', price: 50, desc: '入味滷白菜，清爽解膩' },
+                { id: 28, name: '燙麻油豬肝', price: 70, desc: '新鮮豬肝配麻油' },
+                { id: 29, name: '腰內肉切盤', price: 100, desc: '嫩腰內肉切盤' },
+                { id: 30, name: '滷筍絲', price: 50, desc: '爽脆滷筍絲，清香回甘' }
             ],
             soup: [
-                { id: 19, name: '豬內肉湯', price: 80, desc: '清甜豬肉湯，溫暖湯品' },
-                { id: 20, name: '白菜滷', price: 100, desc: '傳統白菜滷，家常美味' },
-                { id: 21, name: '麻油高麗菜湯', price: 80, desc: '麻油香配高麗菜，清甜爽口' },
-                { id: 22, name: '麻油米血湯', price: 80, desc: '溫補米血湯，麻油香濃' },
-                { id: 23, name: '麻油豬肝湯', price: 100, desc: '新鮮豬肝配麻油，營養豐富' },
-                { id: 24, name: '麻油腰內肉湯', price: 110, desc: '嫩腰內肉配麻油，溫補暖身' },
-                { id: 25, name: '麻油雞湯', price: 150, desc: '道地麻油雞，滋補養身' },
-                { id: 26, name: '麻油腰子湯', price: 170, desc: '腰子配麻油，傳統補腎聖品' },
-                { id: 27, name: '麻油鮮魚湯(現煮)', price: 170, desc: '新鮮魚湯配麻油，鮮甜美味' }
+                { id: 31, name: '豬血湯', price: 40, desc: '清甜豬血湯，溫暖湯品' },
+                { id: 32, name: '貢丸湯', price: 60, desc: 'Q彈貢丸清湯', options: ['加油麵', '加意麵'] },
+                { id: 33, name: '豬肝湯', price: 70, desc: '新鮮豬肝湯', options: ['加油麵', '加意麵'] },
+                { id: 34, name: '餛飩湯', price: 70, desc: '鮮肉餛飩湯', options: ['加油麵', '加意麵'] },
+                { id: 35, name: '腰內肉湯', price: 90, desc: '嫩腰內肉湯', options: ['加油麵', '加意麵'] },
+                { id: 36, name: '鱸魚湯(人氣湯品)', price: 150, desc: '新鮮鱸魚湯，鮮甜美味', options: ['加米酒', '加油麵', '加米粉'] },
+                { id: 37, name: '麻油高麗菜湯', price: 80, desc: '麻油香配高麗菜，清甜爽口' },
+                { id: 38, name: '麻油米血湯', price: 80, desc: '溫補米血湯，麻油香濃' },
+                { id: 39, name: '麻油腰內肉湯', price: 110, desc: '嫩腰內肉配麻油，溫補暖身', options: ['加米酒'] },
+                { id: 40, name: '麻油雞湯', price: 150, desc: '道地麻油雞，滋補養身', options: ['加米酒'] },
+                { id: 41, name: '麻油腰子湯', price: 170, desc: '腰子配麻油，傳統補腎聖品', options: ['加米酒'] },
+                { id: 42, name: '麻油雞+腰子湯', price: 200, desc: '雞肉腰子雙重滋補', options: ['加米酒'] },
+                { id: 43, name: '藥膳雞湯', price: 150, desc: '中藥材燉煮雞湯，四季溫補' },
+                { id: 44, name: '藥膳豬腳湯', price: 150, desc: '中藥材燉煮豬腳湯，滋補養身' },
+                { id: 45, name: '藥膳羊肉湯', price: 150, desc: '中藥材燉煮羊肉湯，冬令進補' }
             ]
         };
 
         // === 全域變數 ===
         let currentCategory = 'noodles';
         let cart = {};  // 使用物件形式：{itemId: quantity}
+        let cartOptions = {}; // 儲存客製化選項：{itemId: {selectedOptions: []}}
         let selectedDining = '內用';
         let adminClickCount = 0;
 
@@ -688,14 +713,21 @@
                 const quantity = cart[item.id] || 0;
                 const isSelected = quantity > 0;
                 
+                // 處理選項顯示
+                let optionsHtml = '';
+                if (item.options && item.options.length > 0) {
+                    optionsHtml = `<div style="color: #888; font-size: 12px; margin-top: 3px;">可選：${item.options.join('、')}</div>`;
+                }
+                
                 return `
                     <div class="menu-item ${isSelected ? 'selected' : ''}" id="item-${item.id}">
                         <div class="item-info">
                             <div class="item-details">
                                 <h3>${item.name}</h3>
                                 <p>${item.desc}</p>
+                                ${optionsHtml}
                             </div>
-                            <div class="item-price">$${item.price}</div>
+                            <div class="item-price">${item.price}</div>
                         </div>
                         <div class="quantity-selector">
                             <button class="qty-button" onclick="updateQuantity(${item.id}, -1)" ${quantity <= 0 ? 'disabled' : ''}>-</button>
@@ -790,15 +822,24 @@
             Object.keys(cart).forEach(itemId => {
                 const quantity = cart[itemId];
                 const item = findItemById(parseInt(itemId));
+                const options = cartOptions[itemId]?.selectedOptions || [];
+                
                 if (item) {
                     const itemTotal = item.price * quantity;
                     totalAmount += itemTotal;
+                    
+                    // 顯示選項
+                    let optionsText = '';
+                    if (options.length > 0) {
+                        optionsText = `<div style="color: #888; font-size: 12px;">選項：${options.join('、')}</div>`;
+                    }
                     
                     html += `
                         <div class="order-item">
                             <div>
                                 <div class="item-name">${item.name}</div>
-                                <div style="color: #666; font-size: 14px;">單價 $${item.price}</div>
+                                <div style="color: #666; font-size: 14px;">單價 ${item.price}</div>
+                                ${optionsText}
                             </div>
                             <div class="item-controls">
                                 <button class="control-btn" onclick="updateModalQuantity(${item.id}, -1)">-</button>
@@ -812,7 +853,7 @@
             });
             
             container.innerHTML = html;
-            modalTotal.textContent = `$${totalAmount}`;
+            modalTotal.textContent = `${totalAmount}`;
         }
 
         // === 在彈窗中更新數量 ===
@@ -824,6 +865,7 @@
         // === 移除項目 ===
         function removeItem(itemId) {
             delete cart[itemId];
+            delete cartOptions[itemId]; // 同時清除選項
             renderMenu();
             renderOrderItems();
             updateCartDisplay();
@@ -870,6 +912,7 @@
             
             // 清空購物車和表單
             cart = {};
+            cartOptions = {}; // 同時清空選項
             document.getElementById('customer-name').value = '';
             document.getElementById('customer-phone').value = '';
             
